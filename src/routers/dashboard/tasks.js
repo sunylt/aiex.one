@@ -1,0 +1,66 @@
+import React, { Component } from "react"
+import { Link } from "react-router-dom"
+import { Table,  Button, Icon, Card, Col, Row } from "antd"
+import api from "../../utils/api"
+
+class Tasks extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            tasks: []
+        }
+    }
+
+    componentDidMount() {
+        api.request("FETCH_TASK").then(res => this.setState({ tasks: res }) )
+    }
+
+    render() {
+        const { match } = this.props
+        return (
+            <div className="tasks">
+                <div style={{ paddingBottom:"15px" }}>
+                    <Row gutter={16}>
+                        {
+                            this.state.tasks.map(task => <TaskItem key={task._id} data={task} /> )
+                        }
+                    </Row>
+                </div>
+                <Button size="large" type="primary" ghost><Link to={`${match.url}/add`}>创建任务</Link></Button>
+            </div>
+        )
+    }
+}
+
+
+const PAID_STATE = {
+    "0": "试用中",
+    "1": "已付款",
+    "-1": "待付款",
+    "-2": "已过期"
+}
+
+const TASK_STATE = {
+    "0": "初始化",
+    "1": "运行中",
+    "-1": "等待停止",
+    "-2": "已停止",
+    "-6": "等待删除",
+    "-7": "已删除",
+}
+
+const TaskItem = ({ data }) => {
+    return (
+   
+        <Col span={6}>
+            <Card title={`${data.platform}.${data.tradepair}`} extra={<Link to={`/dashboard/tasks/${data._id}`}>详情</Link>}>
+                <p>收益状态：+150%</p>
+                <p>付款状态：{PAID_STATE[data.paid]}</p>
+                <p>任务状态：{TASK_STATE[data.status]}</p>
+            </Card>
+        </Col>
+  
+    )
+}
+
+export default Tasks
