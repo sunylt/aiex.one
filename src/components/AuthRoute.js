@@ -14,7 +14,7 @@ class AuthRoute extends Component {
 
     render() {
         const { component: Component, isLogin, ...rest } = this.props
-        const _isLogin = isLogin || Cookies.get("oauth")
+        const _isLogin = isLogin || Cookies.get("oauth") || true
         return (
             <Route {...rest} render={props => (
                 _isLogin ? (

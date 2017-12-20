@@ -46,37 +46,42 @@ class DynamicRule extends React.Component {
         })
     }
 
+    componentDidMount() {
+        //this.props.onSubmit()
+    }
+
     render() {
         const { getFieldDecorator } = this.props.form
         return (
             <div>
                 <FormItem {...formItemLayout} label="交易平台">
                     {getFieldDecorator("platform", {
+                        initialValue: "poloniex",
                         rules: [ {
                             required: true,
-                            message: "请选择交易平台",
-                            initialValue: "poloniex"
+                            message: "请选择交易平台"
                         } ],
                     })(
-                        <Select style={{ width: 120 }} onChange={handleChange}>
-                            <Option value="binance">Binace（币安）</Option>
-                            <Option value="liquid">Liquid（李逵）</Option>
+                        <Select style={{ width: 120 }}>
                             <Option value="poloniex">poloniex</Option>
+                            <Option value="binance">binance</Option>
                         </Select>
                     )}
+                   
                 </FormItem>
+                
                 <FormItem {...formItemLayout} label="交易对换">
                     {getFieldDecorator("tradepair", {
+                        initialValue: "usdt-btc",
                         rules: [ {
                             required: true,
                             message: "请选择交易兑换种类",
                             initialValue: "usdt-btc"
                         } ],
                     })(
-                        <Select  style={{ width: 120 }} onChange={handleChange}>
-                            <Option value="usdt-btc">usdt-btc</Option>
-                            <Option value="usdt-eth">usdt-eth</Option>
-                            <Option value="usdt-zrx">usdt-zrx</Option>
+                        <Select  style={{ width: 120 }}>
+                            <Option value="btc-usdt">btc-usdt</Option>
+                            <Option value="zec-btc">zec-btc</Option>
                         </Select>
               
                     )}
@@ -103,9 +108,7 @@ class DynamicRule extends React.Component {
                 </FormItem>
           
                 <FormItem {...formTailLayout}>
-                    <Button type="primary" onClick={this.check}>
-              创建任务
-                    </Button>
+                    <Button type="primary" onClick={this.check}>创建任务</Button>
                 </FormItem>
             </div>
         )
@@ -118,7 +121,7 @@ const WrappedDynamicRule = Form.create()(DynamicRule)
 const AddTask = () => (
     <div className="addTask">
         <h1>创建交易任务</h1>
-        <WrappedDynamicRule />
+        <WrappedDynamicRule onSubmit={() => {alert(1)}} />
     </div>
 )
 

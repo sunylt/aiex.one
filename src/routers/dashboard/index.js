@@ -10,6 +10,7 @@ import Home from "./home"
 import Tasks from "./tasks"
 import AddTask from "./addTask"
 import ViewTask from "./viewTask"
+import Trades from "./Trades"
 import Account from "./account"
 
 class Dashboard extends Component {
@@ -59,6 +60,8 @@ class Dashboard extends Component {
                         <Route exact path={`${match.url}`} component={Home} />
                         <Route exact path={`${match.url}/tasks`} component={Tasks} />
                         <Route path={`${match.url}/tasks/add`} component={AddTask} />
+                        <Route path={`${match.url}/tasks/trades/:id`} component={Trades} />
+                        <Route path={`${match.url}/tasks/balances/:id`} component={Balances} />
                         <Route path={`${match.url}/tasks/:id`} component={ViewTask} />
                         <Route path={`${match.url}/me`} component={Account} />
                     </Switch>
@@ -67,6 +70,8 @@ class Dashboard extends Component {
         )
     }
 }
+
+const Balances = () => (<div>资金记录</div>)
 
 
 export default connect(
