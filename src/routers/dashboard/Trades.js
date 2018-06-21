@@ -26,7 +26,8 @@ class Trades extends Component {
     }
 
     render() {
-        const itemList = this.state.data ? <List /> : null
+        const data = this.state.data
+        const itemList = data ? <List data={data} /> : null
         return (
         <div>
             <h2>交易记录</h2>
@@ -42,9 +43,10 @@ class Trades extends Component {
     }
 }
 
-const List = () => {
+const List = ({data}) => {
+    const items = data.map((item) => (<p>{item}</p>))
     return (
-        <div>列表</div>
+        <div>{items.length ? items : "暂无数据"}</div>
     )
 }
 

@@ -75,6 +75,7 @@ class ViewTask extends Component  {
                 })
                 api.request("EDIT_TASK", formData).then(res => {
                     let data = _this.state.task
+                    data.platform = formData.platform
                     data.apikey = formData.apikey
                     data.tradepair = formData.tradepair
                     data.apisecret = formData.apisecret

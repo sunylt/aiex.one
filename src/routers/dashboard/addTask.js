@@ -108,7 +108,8 @@ class DynamicRule extends React.Component {
                 </FormItem>
           
                 <FormItem {...formTailLayout}>
-                    <Button type="primary" onClick={this.check}>创建任务</Button>
+                    <Button key="1" type="primary" onClick={this.check} style={{marginRight:"10px"}}>创建任务</Button>
+                    <Button key="2" type="normal" size="large" onClick={() =>history.goBack()}>返回</Button>
                 </FormItem>
             </div>
         )
